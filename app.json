@@ -2,14 +2,16 @@
   "expo": {
     "name": "community-marketplace",
     "slug": "community-marketplace",
+     "scheme": "community-marketplace",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/play_store_512.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/tiangerologo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
+      
     },
     "assetBundlePatterns": [
       "**/*"
@@ -18,13 +20,22 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.banderadigital.communitymarketplace",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/play_store_512.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/images/tiangerologo.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "La applicacion permite compartir las fotos de tu producto para compartir en linea."
+        }
+      ]
+    ]
   }
 }
