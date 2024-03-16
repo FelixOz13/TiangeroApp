@@ -10,7 +10,7 @@ export default function Categories({ categoryList }) {
         {''}
         Variedad de Articulos
       </Text>
-      <Text className="text-[16px] text-green-600 font-bold">
+      <Text className="text-[16px] text-green-700 font-bold">
         Escoje una Categoria
       </Text>
 
@@ -26,9 +26,9 @@ export default function Categories({ categoryList }) {
           >
             <Image
               source={{ uri: item.icon }}
-              className="w-[40px] h-[40px] p-1 border-[1px]"
+              className="w-[35px] h-[35px] p-1 border-[1px]"
             />
-            <Text className="text-[9px] mt-1 font-bold mb-1">{item.name}</Text>
+            <Text className="text-[7px] mt-1 font-bold mb-1">{item.name}</Text>
           </TouchableOpacity>
         )}
       />

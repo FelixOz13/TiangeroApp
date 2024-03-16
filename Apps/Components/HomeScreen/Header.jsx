@@ -29,8 +29,8 @@ export default function Header() {
           className="rounded-full w-12 h-12"
         />
         <View>
-          <Text className="text-[16px] text-green-900">Bienvenido</Text>
-          <Text className="text-[20px] font-bold text-green-900">
+          <Text className="text-[16px] text-black font-bold">Bienvenido</Text>
+          <Text className="text-[20px] font-bold text-green-800">
             {user?.fullName}
           </Text>
         </View>

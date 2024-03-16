@@ -22,7 +22,7 @@ export default function HomeScreenStackNav() {
         options={({ route }) => ({
           title: route.params.category,
           headerStyle: {
-            backgroundColor: '#800000',
+            backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
         })}
@@ -32,7 +32,7 @@ export default function HomeScreenStackNav() {
         component={ProductDetail}
         options={{
           headerStyle: {
-            backgroundColor: '#800000',
+            backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
