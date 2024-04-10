@@ -20,7 +20,7 @@ export default function ProfileScreenStackNav() {
         component={MyProducts}
         options={{
           headerStyle: {
-            backgroundColor: '#800000',
+            backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
           headerTitle: 'Mis Productos',
@@ -31,7 +31,7 @@ export default function ProfileScreenStackNav() {
         component={ProductDetail}
         options={{
           headerStyle: {
-            backgroundColor: '#800000',
+            backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',

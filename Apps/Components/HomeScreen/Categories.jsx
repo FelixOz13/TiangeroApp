@@ -26,9 +26,9 @@ export default function Categories({ categoryList }) {
           >
             <Image
               source={{ uri: item.icon }}
-              className="w-[40px] h-[40px] p-1 border-[1px]"
+              className="w-[35px] h-[35px] p-1 border-[1px]"
             />
-            <Text className="text-[9px] mt-1 font-bold mb-1">{item.name}</Text>
+            <Text className="text-[6.5px] mt-1 font-bold mb-1">{item.name}</Text>
           </TouchableOpacity>
         )}
       />

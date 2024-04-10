@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TextInput,
   Image,
-  ToastAndroid,
+  Platform,
   ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
@@ -21,6 +21,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useUser } from '@clerk/clerk-expo'
 
 export default function AddPostScreen() {
+  const [showBottomNavBar, setShowBottomNavBar] = useState(true);
   const [image, setImage] = useState(null)
   const db = getFirestore(app)
   const storage = getStorage()
@@ -132,50 +133,73 @@ export default function AddPostScreen() {
           validate={(values) => {
             const errors = {}
             if (!values.name) {
-              console.log('Articulo no Ingresado')
-              ToastAndroid.show(
-                'Articulo debe ser Ingresado',
-                ToastAndroid.SHORT,
-              )
-              errors.name = 'Articulo debe ser Ingresado'
-            }
+              console.log('Articulo no Ingresado');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show(
+                  'Articulo debe ser Ingresado',
+                  ToastAndroid.SHORT,
+                );
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Articulo debe ser Ingresado');
+              }
+              errors.name = 'Articulo debe ser Ingresado';
+            }        
             if (!values.desc) {
-              console.log('Descripción no Ingresada')
-              ToastAndroid.show(
-                'Descripción debe ser Ingresada',
-                ToastAndroid.SHORT,
-              )
-              errors.desc = 'Descripción debe ser Ingresada'
-            }
+              console.log('Descripción no Ingresada');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show(
+                  'Descripción debe ser Ingresada',
+                  ToastAndroid.SHORT,
+                );
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Descripción debe ser Ingresada');
+              }
+              errors.desc = 'Descripción debe ser Ingresada';
+            }  
             if (!values.category) {
-              console.log('Categoría no Ingresada')
-              ToastAndroid.show(
-                'Categoría debe ser Ingresada',
-                ToastAndroid.SHORT,
-              )
-              errors.category = 'Categoría debe ser Ingresada'
+              console.log('Categoría no Ingresada');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show(
+                  'Categoría debe ser Ingresada',
+                  ToastAndroid.SHORT,
+                );
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Categoría debe ser Ingresada');
+              }
+              errors.category = 'Categoría debe ser Ingresada';
             }
             if (!values.address) {
-              console.log('Domicilio no Ingresada')
-              ToastAndroid.show(
-                'Domicilio debe ser Ingresada',
-                ToastAndroid.SHORT,
-              )
-              errors.address = 'Domicilio debe ser Ingresada'
+              console.log('Domicilio no Ingresado');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show(
+                  'Domicilio debe ser Ingresado',
+                  ToastAndroid.SHORT,
+                );
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Domicilio debe ser Ingresado');
+              }
+              errors.address = 'Domicilio debe ser Ingresado';
             }
             if (!values.phone) {
-              console.log('Teléfono no Ingresado')
-              ToastAndroid.show(
-                'Teléfono debe ser Ingresado',
-                ToastAndroid.SHORT,
-              )
-              errors.phone = 'Teléfono debe ser Ingresado'
+              console.log('Teléfono no Ingresado');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show(
+                  'Teléfono debe ser Ingresado',
+                  ToastAndroid.SHORT,
+                );
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Teléfono debe ser Ingresado');
+              }
+              errors.phone = 'Teléfono debe ser Ingresado';
             }
-
             if (!values.price) {
-              console.log('Precio no Ingresado')
-              ToastAndroid.show('Precio debe ser Ingresado', ToastAndroid.SHORT)
-              errors.price = 'Precio debe ser Ingresado'
+              console.log('Precio no Ingresado');
+              if (Platform.OS === 'android') {
+                ToastAndroid.show('Precio debe ser Ingresado', ToastAndroid.SHORT);
+              } else if (Platform.OS === 'ios') {
+                Alert.alert('Precio debe ser Ingresado');
+              }
+              errors.price = 'Precio debe ser Ingresado';
             }
 
             // You can add validation for the image field if needed
@@ -187,7 +211,7 @@ export default function AddPostScreen() {
             return errors
           }}
         >
-          {({ handleChange, values, handleSubmit, setFieldValue, errors }) => (
+          {({ handleChange, values, handleSubmit, showBottomNavBar, setFieldValue, errors }) => (
             <ScrollView>
               <TouchableOpacity onPress={pickImage}>
                 {image ? (
@@ -241,13 +265,7 @@ export default function AddPostScreen() {
               />
               <Text className="pt-5">Categoria de Producto</Text>
               {/* Category List Dropdown */}
-              <View
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  marginTop: 15,
-                }}
-              >
+              <View>
                 <Picker
                   selectedValue={values?.category}
                   className="border-2"
@@ -264,23 +282,18 @@ export default function AddPostScreen() {
                     />
                   ))}
                 </Picker>
-              </View>
-              <TouchableOpacity
-                onPress={handleSubmit}
-                style={{
-                  backgroundColor: loading ? '#ccc' : '#008000',
-                }}
-                disabled={loading}
-                className="p-4 bg-green-500 rounded-full mt-10"
-              >
+                <TouchableOpacity onPress={handleSubmit} style={{backgroundColor: loading ? '#ccc' : '#008000',}}
+                 disabled={loading}
+                 className="p-4 bg-green-500 rounded-full mt-1">
                 {loading ? (
-                  <ActivityIndicator color="#fff" />
+               <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text className="text-white text-center text-[16px]">
-                    Subir
-                  </Text>
-                )}
-              </TouchableOpacity>
+               <Text className="text-white text-center text-[16px]">
+               Subir
+              </Text>
+              )}
+           </TouchableOpacity>
+              </View>
             </ScrollView>
           )}
         </Formik>

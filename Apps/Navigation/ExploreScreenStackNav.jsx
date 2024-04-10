@@ -19,7 +19,7 @@ export default function ExploreScreenStackNav() {
         component={ProductDetail}
         options={{
           headerStyle: {
-            backgroundColor: '#800000',
+            backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
