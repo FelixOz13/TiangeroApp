@@ -34,9 +34,7 @@ export default function HomeScreenStackNav() {
         component={ProductDetail}
         options={{
           headerStyle: {
-            backgroundColor: '#006400',
-  
-            
+            backgroundColor: '#800000',
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',

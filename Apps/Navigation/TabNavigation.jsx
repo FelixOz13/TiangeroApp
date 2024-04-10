@@ -18,7 +18,7 @@ export default function TabNavigation() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: 'green', // Change the active tab color to red
-        tabBarInactiveTintColor: 'gray', // Change the inactive tab color to black
+        tabBarInactiveTintColor: 'black', // Change the inactive tab color to black
       }}
     >
       <Tab.Screen

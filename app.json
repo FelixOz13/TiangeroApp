@@ -2,13 +2,13 @@
   "expo": {
     "name": "Tiangero",
     "slug": "community-marketplace",
-    "scheme": "community-marketplace",
-    "version": "2.0.0",
+     "scheme": "community-marketplace",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/play_store_512.png",
+    "icon": "./assets/images/playstore.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/tiangerologo.png",
+      "image": "./assets/images/splashscreen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -16,14 +16,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.banderadigital.tiangero",
-      "usesAppleSignIn": true
+      "supportsTablet": true
     },
     "android": {
       "package": "com.banderadigital.communitymarketplace",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/play_store_512.png",
+        "foregroundImage": "./assets/images/playstore.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -39,14 +37,7 @@
         {
           "photosPermission": "La aplicación permite compartir las fotos de tu producto para compartir en línea."
         }
-      ],
-      "expo-secure-store",
-      "expo-apple-authentication"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "e12550d4-3ec9-4854-b079-5d3e179af5a5"
-      }
-    }
+      ]
+    ]
   }
 }

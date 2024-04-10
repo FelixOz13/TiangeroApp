@@ -30,15 +30,16 @@ export default function MyProducts() {
   }, [navigation])
 
   const getUserPost = async () => {
-    setProductList([])
     const q = query(
       collection(db, 'UserPost'),
       where('userEmail', '==', user?.primaryEmailAddress?.emailAddress),
     )
     const querySnapshot = await getDocs(q)
+    const updatedList = []
     querySnapshot.forEach((doc) => {
-      setProductList((productList) => [...productList, doc.data()])
+      updatedList.push(doc.data())
     })
+    setProductList(updatedList)
   }
 
   return (

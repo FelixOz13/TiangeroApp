@@ -30,8 +30,10 @@ export default function ExploreScreen() {
 
   return (
     <ScrollView className="p-6 py-2">
-      
-      <LatestItemsList className="mt-1" latestItemsList={productList} heading={"Encuentra mas Publicaciones"}/>
+      <Text className="text-[30px] text-green-800 bg-red-800 rounded-lg font-bold mt-[10px]">
+        Encuentra lo que Buscas
+      </Text>
+      <LatestItemsList className="mt-1" latestItemsList={productList} />
     </ScrollView>
   )
 }
