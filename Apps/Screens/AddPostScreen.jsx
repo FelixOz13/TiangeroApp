@@ -132,75 +132,25 @@ export default function AddPostScreen() {
           }}
           validate={(values) => {
             const errors = {}
-            if (!values.name) {
-              console.log('Articulo no Ingresado');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show(
-                  'Articulo debe ser Ingresado',
-                  ToastAndroid.SHORT,
-                );
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Articulo debe ser Ingresado');
-              }
+            if (!values.name || typeof values.name !== 'string' || values.name.trim() === "") {
               errors.name = 'Articulo debe ser Ingresado';
-            }        
-            if (!values.desc) {
-              console.log('Descripción no Ingresada');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show(
-                  'Descripción debe ser Ingresada',
-                  ToastAndroid.SHORT,
-                );
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Descripción debe ser Ingresada');
-              }
+            }
+            if (!values.desc || typeof values.desc !== 'string' || values.desc.trim() === "") {
               errors.desc = 'Descripción debe ser Ingresada';
-            }  
-            if (!values.category) {
-              console.log('Categoría no Ingresada');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show(
-                  'Categoría debe ser Ingresada',
-                  ToastAndroid.SHORT,
-                );
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Categoría debe ser Ingresada');
-              }
+            }
+            if (!values.category || typeof values.category !== 'string' || values.category.trim() === "") {
               errors.category = 'Categoría debe ser Ingresada';
             }
-            if (!values.address) {
-              console.log('Domicilio no Ingresado');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show(
-                  'Domicilio debe ser Ingresado',
-                  ToastAndroid.SHORT,
-                );
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Domicilio debe ser Ingresado');
-              }
+            if (!values.address || typeof values.address !== 'string' || values.address.trim() === "") {
               errors.address = 'Domicilio debe ser Ingresado';
             }
-            if (!values.phone) {
-              console.log('Teléfono no Ingresado');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show(
-                  'Teléfono debe ser Ingresado',
-                  ToastAndroid.SHORT,
-                );
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Teléfono debe ser Ingresado');
-              }
+            if (!values.phone || typeof values.phone !== 'string' || values.phone.trim() === "") {
               errors.phone = 'Teléfono debe ser Ingresado';
             }
-            if (!values.price) {
-              console.log('Precio no Ingresado');
-              if (Platform.OS === 'android') {
-                ToastAndroid.show('Precio debe ser Ingresado', ToastAndroid.SHORT);
-              } else if (Platform.OS === 'ios') {
-                Alert.alert('Precio debe ser Ingresado');
-              }
+            if (!values.price || typeof values.price !== 'string' || values.price.trim() === "") {
               errors.price = 'Precio debe ser Ingresado';
             }
+          
 
             // You can add validation for the image field if needed
             // if (!values.image) {
@@ -209,7 +159,7 @@ export default function AddPostScreen() {
             //   errors.image = 'Imagen debe ser Ingresada';
             // }
             return errors
-          }}
+          }}        
         >
           {({ handleChange, values, handleSubmit, showBottomNavBar, setFieldValue, errors }) => (
             <ScrollView>
@@ -263,7 +213,7 @@ export default function AddPostScreen() {
                 multiline={true}
                 onChangeText={handleChange('address')}
               />
-              <Text className="pt-5">Categoria de Producto</Text>
+              <Text className="pt-1">Categoria de Producto</Text>
               {/* Category List Dropdown */}
               <View>
                 <Picker

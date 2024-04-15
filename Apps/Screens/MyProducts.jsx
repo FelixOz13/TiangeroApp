@@ -48,6 +48,7 @@ export default function MyProducts() {
         latestItemsList={productList}
         userProduct={true}
         heading={'Agenda de Mis Productos a Vender'}
+        
       />
     </View>
   )

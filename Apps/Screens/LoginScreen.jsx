@@ -3,6 +3,7 @@ import React from 'react'
 import * as WebBrowser from 'expo-web-browser'
 import { useWarmUpBrowser } from '../../hooks/warmUpBrowser'
 import { useOAuth } from '@clerk/clerk-expo'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -68,11 +69,32 @@ export default function LoginScreen() {
           necesitas.
         </Text>
         <TouchableOpacity
+   onPress={onPressApple}
+   className="p-4 bg-black rounded-full mt-4"
+   
+ >
+   <Text className="text-white text-center text-[18px]">
+     Inicia con Apple
+     <MaterialCommunityIcons
+       name="apple"
+       size={28}
+       color="white"
+       style={{ marginTop: 35 }}
+     />
+   </Text>
+  </TouchableOpacity>      
+        <TouchableOpacity
           onPress={onPressGoogle}
           className="p-4 bg-red-700 rounded-full mt-6"
         >
           <Text className="text-white text-center text-[18px]">
             Inicia con Google
+            <MaterialCommunityIcons
+              name="google"
+              size={28}
+              color="white"
+              style={{ marginTop: 35 }}
+            />
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -81,16 +103,29 @@ export default function LoginScreen() {
         >
           <Text className="text-white text-center text-[18px]">
             Inicia con Facebook
+            <MaterialCommunityIcons
+              name="facebook"
+              size={28}
+              color="white"
+              style={{ marginTop: 35 }}
+            />
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={onPressApple}
-          className="p-4 bg-black rounded-full mt-4"
-        >
-          <Text className="text-white text-center text-[18px]">
-            Inicia con Apple
-          </Text>
-        </TouchableOpacity>      
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
       </View>
     </View>
   );
@@ -98,4 +133,3 @@ export default function LoginScreen() {
 
 
 
-export default LoginScreen;

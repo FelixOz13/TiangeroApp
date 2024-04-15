@@ -107,7 +107,7 @@ export default function ProductDetail({ navigation, currentLocation }) {
     } catch (error) {
       console.error('Error deleting documents:', error)
     }
-  }
+  } 
   return (
     <View className="bg-white">
       <Image

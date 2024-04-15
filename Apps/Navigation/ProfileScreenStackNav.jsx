@@ -24,6 +24,7 @@ export default function ProfileScreenStackNav() {
           },
           headerTintColor: '#fff',
           headerTitle: 'Mis Productos',
+          headerBackTitleVisible: false,
         }}
       />
       <Stack.Screen
@@ -35,6 +36,7 @@ export default function ProfileScreenStackNav() {
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
+          headerBackTitleVisible: false,
         }}
       />
     </Stack.Navigator>
