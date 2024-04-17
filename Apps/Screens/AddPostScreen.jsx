@@ -50,20 +50,62 @@ export default function AddPostScreen() {
     setCategoryList(categories)
   }
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 4],
-      quality: 1,
-    })
+    // Request permission to access the media library
+    const { status: mediaLibraryStatus } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    // Request permission to access the camera
+    const { status: cameraStatus } = await ImagePicker.requestCameraPermissionsAsync();
 
-    console.log(result)
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri)
+    if (mediaLibraryStatus !== 'granted' || cameraStatus !== 'granted') {
+      Alert.alert('Disculpa, Necesitamos permiso para que esto funcione!');
+      return;
     }
-  }
+
+    // Prompt the user to choose between picking an image or taking a photo
+    Alert.alert(
+      'Elige una Opcion',
+      'Te gustaria tomar una fotografia o escojer alguna imagen de la biblioteca?',
+      [
+        {
+          text: 'Toma una Fotografia',
+          onPress: async () => {
+            // Launch the camera
+            const result = await ImagePicker.launchCameraAsync({
+              allowsEditing: true,
+              aspect: [4, 4],
+              quality: 1,
+            });
+
+            // Check if the operation was canceled
+            if (!result.canceled) {
+              // Update state with the photo URI
+              setImage(result.assets[0].uri);
+            }
+          },
+        },
+        {
+          text: 'Escojer una Imagen',
+          onPress: async () => {
+            // Launch the image library
+            const result = await ImagePicker.launchImageLibraryAsync({
+              mediaTypes: ImagePicker.MediaTypeOptions.Images,
+              allowsEditing: true,
+              aspect: [4, 4],
+              quality: 1,
+            });
+
+            // Check if the operation was canceled
+            if (!result.canceled) {
+              // Update state with the image URI
+              setImage(result.assets[0].uri);
+            }
+          },
+        },
+        { text: 'Cancel', style: 'cancel' },
+      ]
+    );
+  };
+
+
 
   const onSubmitMethod = async (value) => {
     value.image = image
