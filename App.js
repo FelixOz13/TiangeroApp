@@ -6,7 +6,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import TabNavigation from './Apps/Navigation/TabNavigation'
 
 export default function App() {
-  return (
+  return (                         
     <ClerkProvider publishableKey="pk_test_bm90YWJsZS1oeWVuYS01MS5jbGVyay5hY2NvdW50cy5kZXYk">
       <SafeAreaView className="flex-1 bg-white">
         <StatusBar style="auto" />

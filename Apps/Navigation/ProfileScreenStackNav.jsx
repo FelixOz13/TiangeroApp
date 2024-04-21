@@ -23,7 +23,7 @@ export default function ProfileScreenStackNav() {
             backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
-          headerTitle: 'Mis Productos',
+          headerTitle: 'Mis Productos', 
           headerBackTitleVisible: false,
         }}
       />

@@ -1,14 +1,20 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity,Dimensions } from 'react-native'
 import React from 'react'
 import * as WebBrowser from 'expo-web-browser'
 import { useWarmUpBrowser } from '../../hooks/warmUpBrowser'
 import { useOAuth } from '@clerk/clerk-expo'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+
+
 WebBrowser.maybeCompleteAuthSession()
 
 export default function LoginScreen() {
   useWarmUpBrowser()
+  
+
+  
+  
 
   const { startOAuthFlow: startGoogleOAuthFlow } = useOAuth({
     strategy: 'oauth_google',
@@ -56,11 +62,17 @@ export default function LoginScreen() {
     }
   }, [])
 
+  
+
+  
+  const { height } = Dimensions.get('window');
+const isTablet = height > 800;
+
   return (
     <View>
       <Image
         source={require('./../../assets/images/tiangero.png')}
-        className="w-full h-[400px] object-cover"
+        style={{ width: '100%', height: isTablet ? 800 : 400, resizeMode: 'cover' }}
       />
       <View className="p-8 bg-white mt-[-20px] rounded-t-3xl shadow-md items-center justify-center ">
         <Text className="text-[28px] font-bold text-green-600">Tiangero</Text>
@@ -111,25 +123,10 @@ export default function LoginScreen() {
             />
           </Text>
         </TouchableOpacity>
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-      </View>
+        
+     </View>
     </View>
   );
 }
-
 
 

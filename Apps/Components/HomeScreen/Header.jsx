@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { useUser } from '@clerk/clerk-expo'
-import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
 export default function Header() {

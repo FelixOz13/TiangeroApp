@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TextInput,
   Image,
-  Platform,
   ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
@@ -21,7 +20,7 @@ import * as ImagePicker from 'expo-image-picker'
 import { useUser } from '@clerk/clerk-expo'
 
 export default function AddPostScreen() {
-  const [showBottomNavBar, setShowBottomNavBar] = useState(true);
+  
   const [image, setImage] = useState(null)
   const db = getFirestore(app)
   const storage = getStorage()
@@ -105,8 +104,6 @@ export default function AddPostScreen() {
     );
   };
 
-
-
   const onSubmitMethod = async (value) => {
     value.image = image
     setLoading(true)
@@ -142,6 +139,8 @@ export default function AddPostScreen() {
       })
   }
 
+
+  
   return (
     <KeyboardAvoidingView>
       <ScrollView className="p-10">
@@ -174,24 +173,36 @@ export default function AddPostScreen() {
           }}
           validate={(values) => {
             const errors = {}
-            if (!values.name || typeof values.name !== 'string' || values.name.trim() === "") {
-              errors.name = 'Articulo debe ser Ingresado';
-            }
-            if (!values.desc || typeof values.desc !== 'string' || values.desc.trim() === "") {
-              errors.desc = 'Descripción debe ser Ingresada';
-            }
-            if (!values.category || typeof values.category !== 'string' || values.category.trim() === "") {
-              errors.category = 'Categoría debe ser Ingresada';
-            }
-            if (!values.address || typeof values.address !== 'string' || values.address.trim() === "") {
-              errors.address = 'Domicilio debe ser Ingresado';
-            }
-            if (!values.phone || typeof values.phone !== 'string' || values.phone.trim() === "") {
-              errors.phone = 'Teléfono debe ser Ingresado';
-            }
-            if (!values.price || typeof values.price !== 'string' || values.price.trim() === "") {
-              errors.price = 'Precio debe ser Ingresado';
-            }
+            if (!values.name) {
+              console.log('Nombre del Producto no Ingresado');
+                ToastAndroid.show('Nombre del Producto debe ser Ingresado',     ToastAndroid.SHORT);
+                 errors.name = 'Nombre del Producto debe ser Ingresado';
+              }
+              if (!values.desc) {
+                console.log('Descripcion del Producto no Ingresado');
+                  ToastAndroid.show('Descripcion del Producto debe ser Ingresada',     ToastAndroid.SHORT);
+                   errors.desc = 'Descripcion del Producto debe ser Ingresada';
+                }
+                if (!values.category) {
+                  console.log('Categoria del Producto no Ingresado');
+                    ToastAndroid.show('Categoria del Producto debe ser Ingresada',     ToastAndroid.SHORT);
+                     errors.category = 'Categoria del Producto debe ser Ingresada';
+                  }
+                  if (!values.address) {
+                    console.log('Ubicacion de Encuentro debe Ingresada');
+                      ToastAndroid.show('Ubicacion de Encuentro debe Ingresada',     ToastAndroid.SHORT);
+                       errors.address = 'Ubicacion de Encuentro debe Ingresada';
+                    }
+                    if (!values.phone) {
+                      console.log('Telefono del Vendedor debe ser Ingresado');
+                        ToastAndroid.show('Telefono del Vendedor debe ser Ingresado',     ToastAndroid.SHORT);
+                         errors.phone = 'Telefono del Vendedor debe ser Ingresado';
+                      }
+                      if (!values.price) {
+                        console.log('El Precio Aproximado debe ser Ingresado');
+                          ToastAndroid.show('El Precio Aproximado debe ser Ingresado',     ToastAndroid.SHORT);
+                           errors.price = 'El Precio Aproximado debe ser Ingresado';
+                        }
           
 
             // You can add validation for the image field if needed
@@ -203,7 +214,7 @@ export default function AddPostScreen() {
             return errors
           }}        
         >
-          {({ handleChange, values, handleSubmit, showBottomNavBar, setFieldValue, errors }) => (
+          {({ handleChange, values, handleSubmit, setFieldValue, errors }) => (
             <ScrollView>
               <TouchableOpacity onPress={pickImage}>
                 {image ? (

@@ -26,7 +26,7 @@ export default function TabNavigation() {
         component={HomeScreenStackNav}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 18  }}>
               Inicio
             </Text>
           ),
@@ -40,7 +40,7 @@ export default function TabNavigation() {
         component={ExploreScreenStackNav}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 18   }}>
               Explorar
             </Text>
           ),
@@ -54,7 +54,7 @@ export default function TabNavigation() {
         component={AddPostScreen}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 18  }}>
               Publicar
             </Text>
           ),
@@ -68,7 +68,7 @@ export default function TabNavigation() {
         component={ProfileScreenStackNav}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 8  }}>
               Perfil
             </Text>
           ),
