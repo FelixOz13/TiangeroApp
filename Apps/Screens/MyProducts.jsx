@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View } from 'react-native'
+import { View, } from 'react-native'
 import {
   collection,
   getFirestore,
@@ -12,7 +12,9 @@ import { useUser } from '@clerk/clerk-expo'
 import LatestItemsList from '../Components/HomeScreen/LatestItemsList'
 import { useNavigation } from '@react-navigation/native'
 
+
 export default function MyProducts() {
+  
   const db = getFirestore(app)
   const { user } = useUser()
   const [productList, setProductList] = useState([])
@@ -41,14 +43,13 @@ export default function MyProducts() {
     })
     setProductList(updatedList)
   }
-
+  
   return (
     <View>
       <LatestItemsList
         latestItemsList={productList}
         userProduct={true}
         heading={'Agenda de Mis Productos a Vender'}
-        
       />
     </View>
   )

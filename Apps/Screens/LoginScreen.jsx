@@ -4,6 +4,14 @@ import * as WebBrowser from 'expo-web-browser'
 import { useWarmUpBrowser } from '../../hooks/warmUpBrowser'
 import { useOAuth } from '@clerk/clerk-expo'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AppLoading } from "expo-app-loading";
+
+import {
+  useFonts,
+  Roboto_400Regular,
+  Bangers_400Regular,
+  OpenSans_400Regular
+} from "@expo-google-fonts/dev";
 
 
 
@@ -12,7 +20,11 @@ WebBrowser.maybeCompleteAuthSession()
 export default function LoginScreen() {
   useWarmUpBrowser()
   
-
+  let [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+  Bangers_400Regular,
+  OpenSans_400Regular
+  });
   
   
 
@@ -64,69 +76,69 @@ export default function LoginScreen() {
 
   
 
-  
-  const { height } = Dimensions.get('window');
-const isTablet = height > 800;
-
+  if (!fontsLoaded) {
+    return AppLoading;
+  } else {
   return (
-    <View>
+    <View style={{flex:1}}>
+      <View style={{flex: 1.9, alignItems:'stretch'}}>
       <Image
         source={require('./../../assets/images/tiangero.png')}
-        style={{ width: '100%', height: isTablet ? 800 : 400, resizeMode: 'cover' }}
+        style={{flex:1, width: null, height: null }}
       />
-      <View className="p-8 bg-white mt-[-20px] rounded-t-3xl shadow-md items-center justify-center ">
-        <Text className="text-[28px] font-bold text-green-600">Tiangero</Text>
-        <Text className="text-[18px] text-slate-500 mt-6">
+      </View>
+      <View className=" p-9 bg-green-700 mt-[-35px] items-center justify center rounded-t-3xl">
+        <Text  style={{ fontFamily: "Bangers_400Regular", fontSize: 50,  color:"white" }}>Tiangero</Text>
+        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 20,  color:"white" }}>
           Mercado de Compra y Venta para obtener ganancias y encontrar lo que
           necesitas.
         </Text>
+
+        
+
         <TouchableOpacity
-   onPress={onPressApple}
-   className="p-4 bg-black rounded-full mt-4"
-   
- >
-   <Text className="text-white text-center text-[18px]">
-     Inicia con Apple
+         onPress={onPressApple}
+          className="pb-5 pl-5 pr-5 pt-5 bg-black rounded-full mt-4">
+   <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+     Inicia con Apple{"  "}
      <MaterialCommunityIcons
        name="apple"
-       size={28}
+       size={32}
        color="white"
-       style={{ marginTop: 35 }}
+       style={{ marginTop: 15 }}
      />
    </Text>
   </TouchableOpacity>      
         <TouchableOpacity
           onPress={onPressGoogle}
-          className="p-4 bg-red-700 rounded-full mt-6"
+          className="pb-5 pl-5 pr-5 pt-5 bg-red-700 rounded-full mt-4"
         >
-          <Text className="text-white text-center text-[18px]">
-            Inicia con Google
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+            Inicia con Google{"  "}
             <MaterialCommunityIcons
               name="google"
-              size={28}
+              size={32}
               color="white"
-              style={{ marginTop: 35 }}
+              style={{ marginTop: 15 }}
             />
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={onPressFacebook}
-          className="p-4 bg-blue-700 rounded-full mt-4"
+          className="pb-5 pl-5 pr-5 pt-5 bg-blue-700 rounded-full mt-4"
         >
-          <Text className="text-white text-center text-[18px]">
-            Inicia con Facebook
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+            Inicia con Facebook{"  "}
             <MaterialCommunityIcons
               name="facebook"
-              size={28}
+              size={32}
               color="white"
-              style={{ marginTop: 35 }}
+              style={{ marginTop: 15 }}
             />
           </Text>
         </TouchableOpacity>
-        
+        </View> 
      </View>
-    </View>
+    
   );
-}
-
-
+}}

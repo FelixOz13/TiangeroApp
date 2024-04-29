@@ -4,8 +4,11 @@ import ProfileScreen from '../Screens/ProfileScreen'
 import MyProducts from '../Screens/MyProducts'
 import ProductDetail from '../Screens/ProductDetail'
 
+
 const Stack = createStackNavigator()
 export default function ProfileScreenStackNav() {
+  
+   
   return (
     <Stack.Navigator>
       <Stack.Screen

@@ -2,11 +2,8 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreenStackNav from './HomeScreenStackNav'
-import ExploreScreen from '../Screens/ExploreScreen'
 import AddPostScreen from '../Screens/AddPostScreen'
-import ProfileScreen from '../Screens/ProfileScreen'
 import ProfileScreenStackNav from './ProfileScreenStackNav'
-
 import { Ionicons, Octicons, Feather, MaterialIcons } from '@expo/vector-icons'
 import ExploreScreenStackNav from './ExploreScreenStackNav'
 
@@ -26,7 +23,7 @@ export default function TabNavigation() {
         component={HomeScreenStackNav}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 18  }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color:color,marginLeft: 18  }}>
               Inicio
             </Text>
           ),
@@ -68,7 +65,7 @@ export default function TabNavigation() {
         component={ProfileScreenStackNav}
         options={{
           tabBarLabel: ({ color }) => (
-            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 8  }}>
+            <Text style={{ fontSize: 12, marginBottom: 3, color: color,marginLeft: 18  }}>
               Perfil
             </Text>
           ),

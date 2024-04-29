@@ -1,100 +1,101 @@
 {
-  "expo": {
-    "name": "Tiangero",
-    "slug": "community-marketplace",
-    "scheme": "community-marketplace",
-    "version": "6.0.0",
-    "privacy": "public",
-    "ios": {
-      "buildNumber": "6",
-      "supportsTablet": true,
-      "bundleIdentifier": "com.banderadigital.communitymarketplace",
-      "infoPlist": {
-        "NSPrivacy": {
-          "NSPrivacyAccessedAPITypes": [
-            {
-              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
-              "NSPrivacyAccessedAPITypeReasons": [
-                "DDA9.1",
-                "C617.1",
-                "3B52.1",
-                "0A2A.1"
-              ]
-            },
-            {
-              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
-              "NSPrivacyAccessedAPITypeReasons": [
-                "35F9.1",
-                "8FFB.1",
-                "3D61.1"
-              ]
-            },
-            {
-              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace",
-              "NSPrivacyAccessedAPITypeReasons": [
-                "85F4.1",
-                "E174.1",
-                "7D9E.1",
-                "B728.1"
-              ]
-            },
-            {
-              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryActiveKeyboards",
-              "NSPrivacyAccessedAPITypeReasons": [
-                "3EC4.1",
-                "54BD.1"
-              ]
-            },
-            {
-              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-              "NSPrivacyAccessedAPITypeReasons": [
-                "CA92.1",
-                "1C8F.1",
-                "C56D.1",
-                "AC6B.1"
-              ]
-            }
-          ]
+    "expo": {
+      "name": "Tiangero",
+      "slug": "community-marketplace",
+      "scheme": "community-marketplace",
+      "version": "8.0.0",
+      "privacy": "public",
+      "ios": {
+        "buildNumber": "8",
+        "supportsTablet": true,
+        "bundleIdentifier": "com.banderadigital.communitymarketplace",
+        "infoPlist": {
+          "NSPrivacy": {
+            "NSPrivacyAccessedAPITypes": [
+              {
+                "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
+                "NSPrivacyAccessedAPITypeReasons": [
+                  "DDA9.1",
+                  "C617.1",
+                  "3B52.1",
+                  "0A2A.1"
+                ]
+              },
+              {
+                "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
+                "NSPrivacyAccessedAPITypeReasons": [
+                  "35F9.1",
+                  "8FFB.1",
+                  "3D61.1"
+                ]
+              },
+              {
+                "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace",
+                "NSPrivacyAccessedAPITypeReasons": [
+                  "85F4.1",
+                  "E174.1",
+                  "7D9E.1",
+                  "B728.1"
+                ]
+              },
+              {
+                "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryActiveKeyboards",
+                "NSPrivacyAccessedAPITypeReasons": [
+                  "3EC4.1",
+                  "54BD.1"
+                ]
+              },
+              {
+                "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+                "NSPrivacyAccessedAPITypeReasons": [
+                  "CA92.1",
+                  "1C8F.1",
+                  "C56D.1",
+                  "AC6B.1"
+                ]
+              }
+            ]
+          }
         }
-      }
-    },
-    "orientation": "portrait",
-    "icon": "./assets/images/tiangerologo.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/images/splashscreen.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "android": {
-      "package": "com.banderadigital.communitymarketplace",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/images/playstore.png",
+      },
+      "orientation": "portrait",
+      "icon": "./assets/images/tiangerologo.png",
+      "userInterfaceStyle": "light",
+      "splash": {
+        "image": "./assets/images/splashscreen.png",
+        "resizeMode": "contain",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
-    },
-    "web": {
-      "favicon": "./assets/images/tiangerologo.png"
-    },
-    "plugins": [
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "La aplicación permite compartir las fotos de tu producto para compartir en línea."
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "android": {
+        "package": "com.banderadigital.communitymarketplace",
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/images/playstore.png",
+          "backgroundColor": "#ffffff"
+        },
+        "permissions": [
+          "android.permission.RECORD_AUDIO"
+        ]
+      },
+      "web": {
+        "favicon": "./assets/images/tiangerologo.png"
+      },
+      "plugins": [
+        [
+          "expo-image-picker",
+          {
+            "photosPermission": "La aplicación permite compartir las fotos de tu producto para compartir en línea.",
+            "cameraPermission": "La aplicación permite compartir las fotos de tu producto para compartir en línea."
+          }
+        ]
+      ],
+      "extra": {
+        "eas": {
+          "projectId": "e12550d4-3ec9-4854-b079-5d3e179af5a5"
         }
-      ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "e12550d4-3ec9-4854-b079-5d3e179af5a5"
-      }
-    },
-    "owner": "felixozuna13"
+      },
+      "owner": "felixozuna13"
+    }
   }
-}
