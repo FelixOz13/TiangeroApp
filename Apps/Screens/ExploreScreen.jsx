@@ -9,21 +9,9 @@ import {
 } from 'firebase/firestore';
 import { app } from '../../firebaseConfig';
 import LatestItemsList from '../Components/HomeScreen/LatestItemsList';
-import { AppLoading } from "expo-app-loading";
 
-import {
-  useFonts,
-  Roboto_400Regular,
-  Bangers_400Regular,
-  
-} from "@expo-google-fonts/dev";
 
 export default function ExploreScreen() {
-  let [fontsLoaded] = useFonts({
-  Roboto_400Regular,
-  Bangers_400Regular,
-  
-  });
   const db = getFirestore(app);
   const [productList, setProductList] = useState([]);
 
@@ -49,11 +37,9 @@ export default function ExploreScreen() {
   const renderItem = ({ item }) => {
     switch (item.key) {
       case 'header':
-        if (!fontsLoaded) {
-          return AppLoading;
-        } else {
+         {
         return (
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 40,  color:"green" ,marginTop:3,marginBottom:0}}>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 35,  color:"green" ,marginTop:3,marginBottom:-20}}>
             Encuentra lo que Buscas
           </Text>
         );}

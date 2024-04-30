@@ -8,21 +8,10 @@ import searchIcon from './../../assets/images/search.png'
 import logoutIcon from './../../assets/images/logout.jpeg'
 import { useNavigation } from '@react-navigation/native'
 import * as SecureStore from 'expo-secure-store'
-import { AppLoading } from "expo-app-loading";
 
-import {
-  useFonts,
-  Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-} from "@expo-google-fonts/dev";
 export default function ProfileScreen() {
 
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-  });
+  
   
   const { user } = useUser()
 
@@ -65,9 +54,7 @@ export default function ProfileScreen() {
       icon: logoutIcon,
     },
   ]
-  if (!fontsLoaded) {
-    return AppLoading;
-  } else {
+  
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <View className="p-5 bg-green-700 flex-1">
@@ -77,7 +64,7 @@ export default function ProfileScreen() {
             className="w-[100px] h-[100px] rounded-full"
           />
 
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 50,  color:"white" }}>{user?.fullName}</Text>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 50,  color:"white" }}>{user?.fullName}</Text>
           <Text className="text-[28px] mt-2 text-white">
             {user?.primaryEmailAddress?.emailAddress}
           </Text>
@@ -102,7 +89,7 @@ export default function ProfileScreen() {
                 {item.icon && (
                   <Image source={item?.icon} className="w-[60px] h-[60px]" />
                 )}
-                <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 13,  color:"black" }}>{item?.name}</Text>
+                <Text style={{ fontFamily: "Bangers-Regular", fontSize: 13,  color:"black" }}>{item?.name}</Text>
               </TouchableOpacity>
             )
           }}
@@ -110,4 +97,4 @@ export default function ProfileScreen() {
       </View>
     </GestureHandlerRootView>
   )
-}}
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useCallback } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -21,22 +21,11 @@ import { Picker } from '@react-native-picker/picker'
 import { Formik } from 'formik'
 import * as ImagePicker from 'expo-image-picker'
 import { useUser } from '@clerk/clerk-expo'
-import { AppLoading } from "expo-app-loading";
 
 
-import {
-  useFonts,
-  Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-} from "@expo-google-fonts/dev";
 
 export default function AddPostScreen() {
-  let [fontsLoaded] = useFonts({
-  Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-  });
+  
   const [image, setImage] = useState(null)
   const db = getFirestore(app)
   const storage = getStorage()
@@ -173,17 +162,15 @@ const ImagePickerButton = ({ image, pickImage }) => {
   );
 };
 
-  if (!fontsLoaded) {
-    return AppLoading;
-  } else {
+
   
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView >
       <ScrollView className="p-3">
-      <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 35,  color:"green" }}>
+      <Text style={{ fontFamily: "Bangers-Regular", fontSize: 35,  color:"green" }}>
           Agrega tus Productos
         </Text>
-        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 20,  color:"red",paddingBottom:3}}>
+        <Text style={{ fontFamily: "Bangers-Regular", fontSize: 20,  color:"red",paddingBottom:3}}>
           Agrega tus Productos y Comienza a Vender
         </Text>
        <Formik
@@ -284,7 +271,7 @@ const ImagePickerButton = ({ image, pickImage }) => {
                 multiline={true}
                 onChangeText={handleChange('address')}
               />
-               <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 20,  color:"red", paddingTop:2}}>Categoria de Producto</Text>
+               <Text style={{ fontFamily: "Bangers-Regular", fontSize: 20,  color:"red", paddingTop:2}}>Categoria de Producto</Text>
               {/* Category List Dropdown */}
               <View>
                 <Picker
@@ -310,7 +297,7 @@ const ImagePickerButton = ({ image, pickImage }) => {
                 {loading ? (
                <ActivityIndicator color="#fff" />
                 ) : (
-                  <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 20, color: "red", paddingTop: 2, textAlign: 'center' }}>Subir</Text>
+                  <Text style={{ fontFamily: "Bangers-Regular", fontSize: 20, color: "red", paddingTop: 2, textAlign: 'center' }}>Subir</Text>
 
               )}
            </TouchableOpacity>
@@ -321,7 +308,7 @@ const ImagePickerButton = ({ image, pickImage }) => {
       </ScrollView>
     </KeyboardAvoidingView>
   )
-}}
+}
 
 const styles = StyleSheet.create({
   input: {

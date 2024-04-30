@@ -1,17 +1,16 @@
-import { View, Text, Image, TouchableOpacity,Dimensions } from 'react-native'
-import React from 'react'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
+import React, {useCallback} from 'react'
 import * as WebBrowser from 'expo-web-browser'
 import { useWarmUpBrowser } from '../../hooks/warmUpBrowser'
 import { useOAuth } from '@clerk/clerk-expo'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AppLoading } from "expo-app-loading";
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
 
-import {
-  useFonts,
-  Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-} from "@expo-google-fonts/dev";
+
+SplashScreen.preventAutoHideAsync();
+
+
 
 
 
@@ -20,11 +19,7 @@ WebBrowser.maybeCompleteAuthSession()
 export default function LoginScreen() {
   useWarmUpBrowser()
   
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  Bangers_400Regular,
-  OpenSans_400Regular
-  });
+ 
   
   
 
@@ -74,22 +69,33 @@ export default function LoginScreen() {
     }
   }, [])
 
-  
+  const [fontsLoaded, fontError] = useFonts({
+    'Bangers-Regular': require('../../assets/fonts/Bangers-Regular.ttf'),
+  });
 
-  if (!fontsLoaded) {
-    return AppLoading;
-  } else {
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
+
+  
   return (
-    <View style={{flex:1}}>
-      <View style={{flex: 1.9, alignItems:'stretch'}}>
+    <View style={{flex:1}} onLayout={onLayoutRootView}>
+      <View style={{flex: 1.6, alignItems:'stretch'}}>
       <Image
         source={require('./../../assets/images/tiangero.png')}
         style={{flex:1, width: null, height: null }}
       />
       </View>
       <View className=" p-9 bg-green-700 mt-[-35px] items-center justify center rounded-t-3xl">
-        <Text  style={{ fontFamily: "Bangers_400Regular", fontSize: 50,  color:"white" }}>Tiangero</Text>
-        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 20,  color:"white" }}>
+        <Text  style={{ fontFamily: "Bangers-Regular", fontSize: 50,  color:"white" }}>Tiangero</Text>
+        <Text style={{ fontFamily: "Bangers-Regular", fontSize: 20,  color:"white" }}>
           Mercado de Compra y Venta para obtener ganancias y encontrar lo que
           necesitas.
         </Text>
@@ -98,8 +104,8 @@ export default function LoginScreen() {
 
         <TouchableOpacity
          onPress={onPressApple}
-          className="pb-5 pl-5 pr-5 pt-5 bg-black rounded-full mt-4">
-   <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+          className="pb-3 pl-3 pr-3 pt-1 bg-black rounded-full mt-4">
+   <Text style={{ color: 'white', textAlign: 'center', fontSize: 20 ,fontFamily: "Bangers-Regular"}}>
      Inicia con Apple{"  "}
      <MaterialCommunityIcons
        name="apple"
@@ -111,9 +117,9 @@ export default function LoginScreen() {
   </TouchableOpacity>      
         <TouchableOpacity
           onPress={onPressGoogle}
-          className="pb-5 pl-5 pr-5 pt-5 bg-red-700 rounded-full mt-4"
+          className="pb-3 pl-3 pr-3 pt-1 bg-red-700 rounded-full mt-4"
         >
-          <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 20 ,fontFamily: "Bangers-Regular"}}>
             Inicia con Google{"  "}
             <MaterialCommunityIcons
               name="google"
@@ -125,9 +131,9 @@ export default function LoginScreen() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={onPressFacebook}
-          className="pb-5 pl-5 pr-5 pt-5 bg-blue-700 rounded-full mt-4"
+          className="pb-3 pl-3 pr-3 pt-1 bg-blue-700 rounded-full mt-4"
         >
-          <Text style={{ color: 'white', textAlign: 'center', fontSize: 28 ,fontFamily: "Bangers_400Regular"}}>
+          <Text style={{ color: 'white', textAlign: 'center', fontSize: 20 ,fontFamily: "Bangers-Regular"}}>
             Inicia con Facebook{"  "}
             <MaterialCommunityIcons
               name="facebook"
@@ -141,4 +147,4 @@ export default function LoginScreen() {
      </View>
     
   );
-}}
+}

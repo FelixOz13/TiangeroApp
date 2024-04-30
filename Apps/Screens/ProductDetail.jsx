@@ -21,22 +21,11 @@ import {
 } from 'firebase/firestore'
 import { useUser } from '@clerk/clerk-expo'
 import { useNavigation } from '@react-navigation/native'
-import { AppLoading } from "expo-app-loading";
 
-import {
-  useFonts,
-  Roboto_400Regular,
-  Bangers_400Regular,
-  
-} from "@expo-google-fonts/dev";
 
 
 export default function ProductDetail({ navigation, currentLocation }) {
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-    Bangers_400Regular,
-    
-    });
+  
   const { params } = useRoute()
   const [product, setProduct] = useState([])
   const { user } = useUser()
@@ -124,46 +113,46 @@ export default function ProductDetail({ navigation, currentLocation }) {
       console.error('Error deleting documents:', error)
     }
   } 
-  if (!fontsLoaded) {
-    return AppLoading;
-  } else {
+  
   return (
     <View className="bg-green-700">
       <Image
         source={{ uri: product.image }}
-        style={{ height: 310, width: '100%' }}
+        style={{ height: 340, width: '100%' }}
       />
       <View className="p-3">
-      <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 22,  color:"yellow" ,marginTop:3,marginBottom:0}}>
+      <Text style={{ fontFamily: "Bangers-Regular", fontSize: 22,  color:"yellow" ,marginTop:3,marginBottom:0}}>
             {product.category}
           </Text>
-        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 22,  color:"black" ,marginTop:3,marginBottom:0}}>{product?.name}</Text>
+        <Text style={{ fontFamily: "Bangers-Regular", fontSize: 22,  color:"black" ,marginTop:3,marginBottom:0}}>{product?.name}</Text>
         <View className="items-baseline">
           
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>
           Ubicacion
         </Text>
-       <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
+       <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
             {product.address}
           </Text>
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>
             ${" "}{product.price}
           </Text>
         </View>
-        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
+        <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
           Detalles del Producto
         </Text>
-        <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>{product?.desc}</Text>
+        <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"yellow" ,marginTop:3,marginBottom:0}}>{product?.desc}</Text>
       </View>
       {/*User Info*/}
-      <View className="p-1 flex flex-row items-center gap-1 bg-green-100">
+      <View style={{ padding: '0.25rem', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.25rem', backgroundColor: 'yellow' }}>
+  {/* Your content here */}
+
         <Image
           source={{ uri: product.userImage }}
           className="w-12 h-12 rounded-full"
         />
         <View className="p-3">
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>{product.userName}</Text>
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>{product.phone}</Text>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>{product.userName}</Text>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>{product.phone}</Text>
         </View>
       </View>
       {user?.primaryEmailAddress.emailAddress == product.userEmail ? (
@@ -180,11 +169,11 @@ export default function ProductDetail({ navigation, currentLocation }) {
           onPress={sendPhoneMessage}
           className=" z-40 bg-green-500 rounded-full p-4 m-2"
         >
-          <Text style={{ fontFamily: "Bangers_400Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
+          <Text style={{ fontFamily: "Bangers-Regular", fontSize: 18,  color:"black" ,marginTop:3,marginBottom:0}}>
             Enviar Mensaje por Whatsapp
           </Text>
         </TouchableOpacity>
       )}
     </View>
   )
-}}
+}
