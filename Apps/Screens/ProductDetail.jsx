@@ -68,19 +68,20 @@ export default function ProductDetail({ navigation, currentLocation }) {
       )}`,
     )
   }
+
   const deleteUserPost = () => {
     Alert.alert(
       'Deseas Eliminar Esta Publicacion?',
       'Estas Seguro que deseas eliminar esta Publicacion?',
       [
         {
-          text: 'Yes',
+          text: 'Eliminar',
           onPress: () => deleteFromFirestore(),
+          style: 'cancel',
         },
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
         },
       ],
     )
@@ -108,33 +109,134 @@ export default function ProductDetail({ navigation, currentLocation }) {
       console.error('Error deleting documents:', error)
     }
   }
+
   return (
-    <View className="bg-white">
+    <View className="bg-green-700">
       <Image
         source={{ uri: product.image }}
-        style={{ height: 320, width: '100%' }}
+        style={{ height: 340, width: '100%' }}
       />
       <View className="p-3">
-        <Text className="text-[24px] font-bold">{product?.name}</Text>
+        <Text
+          style={{
+            fontFamily: 'Bangers-Regular',
+            fontSize: 22,
+            color: 'yellow',
+            marginTop: 3,
+            marginBottom: 0,
+          }}
+        >
+          {product.category}
+        </Text>
+        <Text
+          style={{
+            fontFamily: 'Bangers-Regular',
+            fontSize: 22,
+            color: 'black',
+            marginTop: 3,
+            marginBottom: 0,
+          }}
+        >
+          {product?.name}
+        </Text>
         <View className="items-baseline">
-          <Text className=" text-[16px] p-1 px-2 mt-2 rounded-full  text-green-700">
-            {product.category}
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'yellow',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
+            Ubicacion
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'black',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
+            {product.address}
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'yellow',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
+            $ {product.price}
           </Text>
         </View>
-        <Text className="mt-3 font-bold text-[20px]">
+        <Text
+          style={{
+            fontFamily: 'Bangers-Regular',
+            fontSize: 18,
+            color: 'black',
+            marginTop: 3,
+            marginBottom: 0,
+          }}
+        >
           Detalles del Producto
         </Text>
-        <Text className="text-[17px] text-gray-500">{product?.desc}</Text>
+        <Text
+          style={{
+            fontFamily: 'Bangers-Regular',
+            fontSize: 18,
+            color: 'yellow',
+            marginTop: 3,
+            marginBottom: 0,
+          }}
+        >
+          {product?.desc}
+        </Text>
       </View>
       {/*User Info*/}
-      <View className="p-1 flex flex-row items-center gap-1 bg-green-100">
+      <View
+        style={{
+          padding: '0.25rem',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: '0.25rem',
+          backgroundColor: 'yellow',
+        }}
+      >
+        {/* Your content here */}
+
         <Image
           source={{ uri: product.userImage }}
           className="w-12 h-12 rounded-full"
         />
         <View className="p-3">
-          <Text className="font-bold text-[18px]">{product.userName}</Text>
-          <Text className="font-bold text-green-500">{product.phone}</Text>
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'black',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
+            {product.userName}
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'black',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
+            {product.phone}
+          </Text>
         </View>
       </View>
       {user?.primaryEmailAddress.emailAddress == product.userEmail ? (
@@ -151,7 +253,15 @@ export default function ProductDetail({ navigation, currentLocation }) {
           onPress={sendPhoneMessage}
           className=" z-40 bg-green-500 rounded-full p-4 m-2"
         >
-          <Text className="text-center collapse text-white">
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 18,
+              color: 'black',
+              marginTop: 3,
+              marginBottom: 0,
+            }}
+          >
             Enviar Mensaje por Whatsapp
           </Text>
         </TouchableOpacity>

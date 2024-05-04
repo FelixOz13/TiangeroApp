@@ -54,15 +54,23 @@ export default function ProfileScreen() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View className="p-5 bg-white flex-1">
+      <View className="p-5 bg-green-700 flex-1">
         <View className="items-center mt-14">
           <Image
             source={{ uri: user?.imageUrl }}
             className="w-[100px] h-[100px] rounded-full"
           />
 
-          <Text className="font-bold text-[25px] mt-2">{user?.fullName}</Text>
-          <Text className="text-[18px] mt-2 text-red-500">
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 50,
+              color: 'white',
+            }}
+          >
+            {user?.fullName}
+          </Text>
+          <Text className="text-[28px] mt-2 text-white">
             {user?.primaryEmailAddress?.emailAddress}
           </Text>
         </View>
@@ -81,12 +89,20 @@ export default function ProfileScreen() {
                     ? navigation.navigate(item.path)
                     : null
                 }
-                className="flex-1 p-2 border-[1px] items-center m-4 mt-4 rounded-lg border-green-700 bg-green-50"
+                className="flex-1 p-2 border-[1px] items-center m-4 mt-4 rounded-lg border-red-700 bg-green-50"
               >
                 {item.icon && (
                   <Image source={item?.icon} className="w-[60px] h-[60px]" />
                 )}
-                <Text className="text-[12px] font-bold">{item?.name}</Text>
+                <Text
+                  style={{
+                    fontFamily: 'Bangers-Regular',
+                    fontSize: 16,
+                    color: 'black',
+                  }}
+                >
+                  {item?.name}
+                </Text>
               </TouchableOpacity>
             )
           }}

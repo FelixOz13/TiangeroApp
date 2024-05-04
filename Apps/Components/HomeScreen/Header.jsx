@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { useUser } from '@clerk/clerk-expo'
-import { Ionicons } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native'
 
 export default function Header() {
   const { user } = useUser()
-  const navigation = useNavigation()
+  {
+    /* const navigation = useNavigation()
   const [searchText, setSearchText] = useState('')
 
   const handleChangeText = (text) => {
@@ -18,6 +18,7 @@ export default function Header() {
     console.log('Searching for:', searchText)
     // Redirect to Categories screen
     navigation.navigate('Categories', { searchQuery: searchText })
+  */
   }
 
   return (
@@ -29,8 +30,23 @@ export default function Header() {
           className="rounded-full w-12 h-12"
         />
         <View>
-          <Text className="text-[16px] text-black font-bold">Bienvenido</Text>
-          <Text className="text-[20px] font-bold text-green-800">
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 35,
+              color: 'green',
+              marginBottom: -20,
+            }}
+          >
+            Bienvenido
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Bangers-Regular',
+              fontSize: 25,
+              color: 'black',
+            }}
+          >
             {user?.fullName}
           </Text>
         </View>
