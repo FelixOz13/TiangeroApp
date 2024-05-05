@@ -61,16 +61,8 @@ export default function ProfileScreen() {
             className="w-[100px] h-[100px] rounded-full"
           />
 
-          <Text
-            style={{
-              fontFamily: 'Bangers-Regular',
-              fontSize: 50,
-              color: 'white',
-            }}
-          >
-            {user?.fullName}
-          </Text>
-          <Text className="text-[28px] mt-2 text-white">
+          <Text className="font-bold text-[25px] mt-2">{user?.fullName}</Text>
+          <Text className="text-[18px] mt-2 text-red-500">
             {user?.primaryEmailAddress?.emailAddress}
           </Text>
         </View>
@@ -94,15 +86,7 @@ export default function ProfileScreen() {
                 {item.icon && (
                   <Image source={item?.icon} className="w-[60px] h-[60px]" />
                 )}
-                <Text
-                  style={{
-                    fontFamily: 'Bangers-Regular',
-                    fontSize: 16,
-                    color: 'black',
-                  }}
-                >
-                  {item?.name}
-                </Text>
+                <Text className="text-[12px] font-bold">{item?.name}</Text>
               </TouchableOpacity>
             )
           }}

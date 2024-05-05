@@ -33,3 +33,9 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Ignore iOS and Android folders
+ios/
+android/
+# react-native-config codegen
+ios/tmp.xcconfig

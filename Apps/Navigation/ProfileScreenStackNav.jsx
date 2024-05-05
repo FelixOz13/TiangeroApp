@@ -4,8 +4,11 @@ import ProfileScreen from '../Screens/ProfileScreen'
 import MyProducts from '../Screens/MyProducts'
 import ProductDetail from '../Screens/ProductDetail'
 
+
 const Stack = createStackNavigator()
 export default function ProfileScreenStackNav() {
+  
+   
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -23,7 +26,8 @@ export default function ProfileScreenStackNav() {
             backgroundColor: '#006400',
           },
           headerTintColor: '#fff',
-          headerTitle: 'Mis Productos',
+          headerTitle: 'Mis Productos', 
+          headerBackTitleVisible: false,
         }}
       />
       <Stack.Screen
@@ -35,6 +39,7 @@ export default function ProfileScreenStackNav() {
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
+          headerBackTitleVisible: false,
         }}
       />
     </Stack.Navigator>

@@ -12,6 +12,7 @@ export default function ExploreScreenStackNav() {
         component={ExploreScreen}
         options={{
           headerShown: false,
+          headerBackTitleVisible: false,
         }}
       />
       <Stack.Screen
@@ -23,6 +24,7 @@ export default function ExploreScreenStackNav() {
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
+          headerBackTitleVisible: false,
         }}
       />
     </Stack.Navigator>

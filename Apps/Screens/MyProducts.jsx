@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import React, { useState, useEffect } from 'react'
+import { View, } from 'react-native'
+>>>>>>> c73f816894126950148c00b327c6b722b84029d1
 import {
   View,
   Text,
@@ -22,9 +27,16 @@ import {
 import { useUser } from '@clerk/clerk-expo'
 import { useNavigation } from '@react-navigation/native'
 
+<<<<<<< HEAD
 export default function ProductDetail({ navigation, currentLocation }) {
   const { params } = useRoute()
   const [product, setProduct] = useState([])
+=======
+
+export default function MyProducts() {
+  
+  const db = getFirestore(app)
+>>>>>>> c73f816894126950148c00b327c6b722b84029d1
   const { user } = useUser()
   const db = getFirestore(app)
   const nav = useNavigation()
@@ -109,7 +121,7 @@ export default function ProductDetail({ navigation, currentLocation }) {
       console.error('Error deleting documents:', error)
     }
   }
-
+  
   return (
     <View className="bg-green-700">
       <Image

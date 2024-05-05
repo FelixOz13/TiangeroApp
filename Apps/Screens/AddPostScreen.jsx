@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   View,
   TouchableOpacity,
@@ -9,9 +9,6 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   ScrollView,
-  ToastAndroid,
-  Platform,
-  Alert,
 } from 'react-native'
 import { app } from '../../firebaseConfig'
 import { getFirestore, getDocs, collection, addDoc } from 'firebase/firestore'
@@ -28,14 +25,6 @@ export default function AddPostScreen() {
   const [loading, setLoading] = useState(false)
   const { user } = useUser()
   const [categoryList, setCategoryList] = useState([])
-
-  function notifyMessage(msg) {
-    if (Platform.OS === 'android') {
-      ToastAndroid.show(msg, ToastAndroid.SHORT)
-    } else {
-      Alert.alert(msg)
-    }
-  }
 
   useEffect(() => {
     getCategoryList()
@@ -58,74 +47,32 @@ export default function AddPostScreen() {
     setCategoryList(categories)
   }
   const pickImage = async () => {
-    // Request permission to access the media library
-    const {
-      status: mediaLibraryStatus,
-    } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-    // Request permission to access the camera
-    const {
-      status: cameraStatus,
-    } = await ImagePicker.requestCameraPermissionsAsync()
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 4],
+      quality: 1,
+    })
 
-    if (mediaLibraryStatus !== 'granted' || cameraStatus !== 'granted') {
-      Alert.alert('Disculpa, Necesitamos permiso para que esto funcione!')
-      return
+    console.log(result)
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri)
     }
-
-    // Prompt the user to choose between picking an image or taking a photo
-    Alert.alert(
-      'Elige una Opcion',
-      'Te gustaria tomar una fotografia o escojer alguna imagen de la biblioteca?',
-      [
-        {
-          text: 'Toma una Fotografia',
-          onPress: async () => {
-            // Launch the camera
-            const result = await ImagePicker.launchCameraAsync({
-              allowsEditing: true,
-              aspect: [4, 4],
-              quality: 1,
-            })
-
-            // Check if the operation was canceled
-            if (!result.canceled) {
-              // Update state with the photo URI
-              setImage(result.assets[0].uri)
-            }
-          },
-        },
-        {
-          text: 'Escoger una Imagen',
-          onPress: async () => {
-            // Launch the image library
-            const result = await ImagePicker.launchImageLibraryAsync({
-              mediaTypes: ImagePicker.MediaTypeOptions.Images,
-              allowsEditing: true,
-              aspect: [4, 4],
-              quality: 1,
-            })
-
-            // Check if the operation was canceled
-            if (!result.canceled) {
-              // Update state with the image URI
-              setImage(result.assets[0].uri)
-            }
-          },
-        },
-        { text: 'Cancelar', style: 'cancel' },
-      ],
-    )
   }
 
   const onSubmitMethod = async (value) => {
-    setLoading(true)
     value.image = image
+    setLoading(true)
+    //Convert Uri to Blob File
     const resp = await fetch(image)
     const blob = await resp.blob()
     const storageRef = ref(storage, 'communityPost/' + Date.now() + '.jpg')
+
     uploadBytes(storageRef, blob)
       .then((snapshot) => {
-        console.log(value, 'Uploaded a blob or file!')
+        console.log('Uploaded a blob or file!')
       })
       .then((resp) => {
         getDownloadURL(storageRef).then(async (downloadUrl) => {
@@ -134,51 +81,29 @@ export default function AddPostScreen() {
           value.userName = user.fullName
           value.userEmail = user.primaryEmailAddress?.emailAddress
           value.userImage = user.imageUrl
+
+          // Log userEmail before displaying Toast
+
           const docRef = await addDoc(collection(db, 'UserPost'), value)
           if (docRef.id) {
             setLoading(false)
-            console.log('Postulacion Agregada!!')
-            Alert.alert('Postulacion Agregada Exitosamente!!')
+            Alert.alert('Postulacion Agregada Exitosamente!!!')
           }
         })
       })
-  }
-
-  const ImagePickerButton = ({ image, pickImage }) => {
-    return (
-      <TouchableOpacity onPress={pickImage}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.image} />
-        ) : (
-          <Image
-            source={require('./../../assets/images/placeholder.png')}
-            style={styles.image}
-          />
-        )}
-      </TouchableOpacity>
-    )
+      .catch((error) => {
+        console.error('Upload error:', error)
+        // Display an error message to the user
+      })
   }
 
   return (
     <KeyboardAvoidingView>
-      <ScrollView className="p-3">
-        <Text
-          style={{
-            fontFamily: 'Bangers-Regular',
-            fontSize: 35,
-            color: 'green',
-          }}
-        >
+      <ScrollView className="p-10">
+        <Text className="text-[27px] font-bold text-green-900">
           Agrega tus Productos
         </Text>
-        <Text
-          style={{
-            fontFamily: 'Bangers-Regular',
-            fontSize: 20,
-            color: 'red',
-            paddingBottom: 3,
-          }}
-        >
+        <Text className="text-[16px] text-red-500 mb-7">
           Agrega tus Productos y Comienza a Vender
         </Text>
         <Formik
@@ -195,53 +120,73 @@ export default function AddPostScreen() {
             userImage: '',
             createdAt: Date.now(),
           }}
-          onSubmit={(value) => onSubmitMethod(value)}
-        >
-          {/*   validate={(values) => {
-            const errors = {};
-           if (!values.name) {
-              console.log('Nombre del Producto no Ingresado');
-              notifyMessage('Nombre del Producto debe ser Ingresado');
-             errors.name = 'Nombre del Producto debe ser Ingresado';
+          onSubmit={(values) => {
+            // Log the form values including the image
+            values.price = values.price.replace('$', '')
+            console.log('Form Values:', values)
+            // Call your onSubmitMethod
+            onSubmitMethod(values)
+          }}
+          validate={(values) => {
+            const errors = {}
+            if (!values.name) {
+              console.log('Articulo no Ingresado')
+              ToastAndroid.show(
+                'Articulo debe ser Ingresado',
+                ToastAndroid.SHORT,
+              )
+              errors.name = 'Articulo debe ser Ingresado'
             }
-           if (!values.desc) {
-              console.log('Descripcion del Producto no Ingresado');
-              notifyMessage('Descripcion del Producto debe ser Ingresada');
-             errors.desc = 'Descripcion del Producto debe ser Ingresada';
+            if (!values.desc) {
+              console.log('Descripcion del Producto no Ingresado')
+              notifyMessage('Descripcion del Producto debe ser Ingresada')
+              errors.desc = 'Descripcion del Producto debe ser Ingresada'
             }
-           if (!values.category) {
-              console.log('Categoria del Producto no Ingresado');
-              notifyMessage('Categoria del Producto debe ser Ingresada');
-              errors.category = 'Categoria del Producto debe ser Ingresada';
-           }
+            if (!values.category) {
+              console.log('Categoria del Producto no Ingresado')
+              notifyMessage('Categoria del Producto debe ser Ingresada')
+              errors.category = 'Categoria del Producto debe ser Ingresada'
+            }
             if (!values.address) {
-              console.log('Ubicacion de Encuentro debe Ingresada');
-              notifyMessage('Ubicacion de Encuentro debe ser Ingresada');
-             errors.address = 'Ubicacion de Encuentro debe ser Ingresada';
+              console.log('Ubicacion de Encuentro debe Ingresada')
+              notifyMessage('Ubicacion de Encuentro debe ser Ingresada')
+              errors.address = 'Ubicacion de Encuentro debe ser Ingresada'
             }
-           if (!values.phone) {
-              console.log('Telefono del Vendedor debe ser Ingresado');
-              notifyMessage('Telefono del Vendedor debe ser Ingresado');
-             errors.phone = 'Telefono del Vendedor debe ser Ingresado';
-           }
-           if (!values.price) {
-              console.log('El Precio Aproximado debe ser Ingresado');
-              notifyMessage('El Precio Aproximado debe ser Ingresado');
-             errors.price = 'El Precio Aproximado debe ser Ingresado';
+            if (!values.phone) {
+              console.log('Telefono del Vendedor debe ser Ingresado')
+              notifyMessage('Telefono del Vendedor debe ser Ingresado')
+              errors.phone = 'Telefono del Vendedor debe ser Ingresado'
             }
-           if (!values.image) {
-              console.log('Imagen no Ingresada');
-              notifyMessage('Imagen debe ser Ingresada');
-              errors.image = 'Imagen debe ser Ingresada';
+            if (!values.price) {
+              console.log('El Precio Aproximado debe ser Ingresado')
+              notifyMessage('El Precio Aproximado debe ser Ingresado')
+              errors.price = 'El Precio Aproximado debe ser Ingresado'
             }
-            return errors;
-       }} */}
 
+            // You can add validation for the image field if needed
+            // if (!values.image) {
+            //   console.log('Imagen no Ingresada');
+            //   ToastAndroid.show('Imagen debe ser Ingresada',     ToastAndroid.SHORT);
+            //   errors.image = 'Imagen debe ser Ingresada';
+            // }
+            return errors
+          }}
+        >
           {({ handleChange, values, handleSubmit, setFieldValue, errors }) => (
             <ScrollView>
-              <View style={styles.container}>
-                <ImagePickerButton image={image} pickImage={pickImage} />
-              </View>
+              <TouchableOpacity onPress={pickImage}>
+                {image ? (
+                  <Image
+                    source={{ uri: image }}
+                    style={{ width: 100, height: 100, borderRadius: 15 }}
+                  />
+                ) : (
+                  <Image
+                    source={require('./../../assets/images/placeholder.png')}
+                    style={{ width: 100, height: 100, borderRadius: 15 }}
+                  />
+                )}
+              </TouchableOpacity>
               <TextInput
                 style={styles.input}
                 placeholder="Articulo"
@@ -279,18 +224,15 @@ export default function AddPostScreen() {
                 multiline={true}
                 onChangeText={handleChange('address')}
               />
-              <Text
+              <Text className="pt-5">Categoria de Producto</Text>
+              {/* Category List Dropdown */}
+              <View
                 style={{
-                  fontFamily: 'Bangers-Regular',
-                  fontSize: 20,
-                  color: 'red',
-                  paddingTop: 2,
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  marginTop: 15,
                 }}
               >
-                Categoria de Producto
-              </Text>
-              {/* Category List Dropdown */}
-              <View>
                 <Picker
                   selectedValue={values?.category}
                   className="border-2"
@@ -308,29 +250,23 @@ export default function AddPostScreen() {
                     />
                   ))}
                 </Picker>
-                <TouchableOpacity
-                  onPress={handleSubmit}
-                  style={{ backgroundColor: loading ? '#ccc' : '#008000' }}
-                  disabled={loading}
-                  className="p-4 bg-green-500 rounded-full mt-1 mb-5"
-                >
-                  {loading ? (
-                    <ActivityIndicator color="#fff" />
-                  ) : (
-                    <Text
-                      style={{
-                        fontFamily: 'Bangers-Regular',
-                        fontSize: 20,
-                        color: 'red',
-                        paddingTop: 2,
-                        textAlign: 'center',
-                      }}
-                    >
-                      Subir
-                    </Text>
-                  )}
-                </TouchableOpacity>
               </View>
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={{
+                  backgroundColor: loading ? '#ccc' : '#008000',
+                }}
+                disabled={loading}
+                className="p-4 bg-green-500 rounded-full mt-10"
+              >
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text className="text-white text-center text-[16px]">
+                    Subir
+                  </Text>
+                )}
+              </TouchableOpacity>
             </ScrollView>
           )}
         </Formik>
