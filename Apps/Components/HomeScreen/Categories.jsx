@@ -6,24 +6,11 @@ export default function Categories({ categoryList }) {
   const navigation = useNavigation()
   return (
     <View className="m-5">
-      <Text
-        style={{
-          fontFamily: 'Bangers-Regular',
-          fontSize: 35,
-          color: 'black',
-          marginBottom: -20,
-        }}
-      >
+      <Text className="text-[16px] text-green-700 font-bold">
         {''}
         Variedad de Articulos
       </Text>
-      <Text
-        style={{
-          fontFamily: 'Bangers-Regular',
-          fontSize: 25,
-          color: 'green',
-        }}
-      >
+      <Text className="text-[16px] text-green-700 font-bold">
         Escoje una Categoria
       </Text>
 

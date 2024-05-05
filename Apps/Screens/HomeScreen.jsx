@@ -9,7 +9,6 @@ import { app } from '../../firebaseConfig'
 import { FlatList } from 'react-native-gesture-handler'
 
 export default function HomeScreen() {
-  
   const db = getFirestore(app)
   const [sliderList, setSliderList] = useState([])
   const [categoryList, setCategoryList] = useState([])
@@ -57,7 +56,7 @@ export default function HomeScreen() {
       setLatestItemsList((latestItemsList) => [...latestItemsList, doc.data()])
     })
   }
-  
+
   return (
     <View className="py-8 px-6 bg-white flex-1">
       <FlatList
@@ -78,7 +77,6 @@ export default function HomeScreen() {
           <LatestItemsList
             latestItemsList={latestItemsList}
             heading={'Agregado Recientemente'}
-            
           />
         )}
       />

@@ -7,8 +7,6 @@ import React from 'react'
 const Stack = createStackNavigator()
 
 export default function HomeScreenStackNav() {
-  
-   
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -16,7 +14,7 @@ export default function HomeScreenStackNav() {
         component={HomeScreen}
         options={{
           headerShown: false,
-          headerBackTitleVisible: false, 
+          headerBackTitleVisible: false,
         }}
       />
       <Stack.Screen
@@ -28,12 +26,11 @@ export default function HomeScreenStackNav() {
             backgroundColor: '#006400',
           },
           headerText: {
-            fontFamily: 'Bangers-Regular',
             fontSize: 20,
             color: '#fff',
           },
           headerTintColor: '#fff',
-          headerBackTitleVisible: false, 
+          headerBackTitleVisible: false,
         })}
       />
       <Stack.Screen
@@ -44,14 +41,13 @@ export default function HomeScreenStackNav() {
             backgroundColor: '#006400',
           },
           headerText: {
-            fontFamily: 'Bangers-Regular',
             fontSize: 20,
             color: '#fff',
           },
           headerTintColor: '#fff',
           headerTitle: 'Detalles del Producto',
-          headerBackTitleVisible: false, 
-         }}
+          headerBackTitleVisible: false,
+        }}
       />
     </Stack.Navigator>
   )

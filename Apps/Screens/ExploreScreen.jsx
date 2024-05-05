@@ -36,7 +36,6 @@ export default function ExploreScreen() {
         return (
           <Text
             style={{
-              fontFamily: 'Bangers-Regular',
               fontSize: 35,
               color: 'green',
               marginTop: 3,
